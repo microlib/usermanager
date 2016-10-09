@@ -1,8 +1,8 @@
-# usermanager
+# User Manager
 
 Endpoint: `/users`
 
-# request 
+# Request 
 
 ## POST: create
 
@@ -74,3 +74,45 @@ none
 - name
 - email
 - password
+
+## Response
+
+**single resource**
+
+```json
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      name: "john",
+      email: "john@thesmithcompany.com",
+      password: "ja8q\+Y!?FCD3":P"
+    }
+  }
+}
+```
+**multiple resources**
+
+```json
+{
+  "data": [{
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      name: "john",
+      email: "john@thesmithcompany.com",
+      password: "ja8q\+Y!?FCD3\":P"
+    }
+  }, 
+  {
+    "type": "users",
+    "id": "2",
+    "attributes": {
+      name: "bob",
+      email: "bob@hello.co.uk",
+      password: "ja8q\+Y!?FCD3(:P"
+    }
+  }]
+}
+```
