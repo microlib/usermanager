@@ -85,9 +85,9 @@ none
     "type": "users",
     "id": "1",
     "attributes": {
-      name: "john",
-      email: "john@thesmithcompany.com",
-      password: "ja8q\+Y!?FCD3":P"
+      "name": "john",
+      "email": "john@thesmithcompany.com",
+      "password": "ja8q\+Y!?FCD3":P"
     }
   }
 }
