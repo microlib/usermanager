@@ -4,6 +4,8 @@ Endpoint: `/users`
 
 # Request 
 
+HTTP verbs: http://www.restapitutorial.com/lessons/httpmethods.html
+
 ## POST: create
 
 ### required fields
