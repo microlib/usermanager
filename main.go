@@ -1,5 +1,0 @@
-package usermanager
-
-func main() {
-
-}
