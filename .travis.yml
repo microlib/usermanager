@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - 1.7
+  - tip
+
+go_import_path: github.com/microlib/usermanager
+
+script:
+  - go test ./...
