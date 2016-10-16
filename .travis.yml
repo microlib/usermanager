@@ -8,3 +8,6 @@ go_import_path: github.com/microlib/usermanager
 
 script:
   - go test ./...
+  
+notifications:
+  slack: microlib:LMRLKmZEldpHe2FQv6Pszuzu
