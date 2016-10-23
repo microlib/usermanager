@@ -119,4 +119,23 @@ none
 }
 ```
 
+## Develeopment
+
+To build an image locally execute the following script
+
+```
+docker build -t usermanager:dev .
+
+```
+
+
+To execute it run the following script
+
+```
+docker run -it  --name usermanager -v /<your-dev-direcotory>/src/github.com/microlib/usermanager/:/go --privileged <image-id>
+
+```
+
+
+
 [![Coverage Status](https://coveralls.io/repos/github/microlib/usermanager/badge.svg?branch=master)](https://coveralls.io/github/microlib/usermanager?branch=master)
