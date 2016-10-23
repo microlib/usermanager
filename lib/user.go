@@ -10,14 +10,14 @@ type UserInterface interface {
 
 // NewUser is the constructor for User
 func NewUser(id string, name string, email string, password string) *User {
-	return &User{id:id, name:name, email:email, password:password}
+	return &User{id: id, name: name, email: email, password: password}
 }
 
 // User object
 type User struct {
-	id string
-	name string
-	email string
+	id       string
+	name     string
+	email    string
 	password string
 }
 

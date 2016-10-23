@@ -10,4 +10,3 @@ type UsersInterface interface {
 
 type Users struct {
 }
-
