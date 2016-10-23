@@ -13,8 +13,6 @@ install:
 
 script:
   - go test ./...
-  - $HOME/gopath/bin/gover
-  - $HOME/gopath/bin/goveralls -coverprofile=gover.coverprofile -service=travis-ci
   
 notifications:
   slack: microlib:LMRLKmZEldpHe2FQv6Pszuzu
