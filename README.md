@@ -118,3 +118,5 @@ none
   }]
 }
 ```
+
+[![Coverage Status](https://coveralls.io/repos/github/microlib/usermanager/badge.svg?branch=master)](https://coveralls.io/github/microlib/usermanager?branch=master)
