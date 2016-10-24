@@ -22,4 +22,3 @@ func (a *ApiRequest) Param(param string) (string, error) {
 	}
 	return v, nil
 }
-
