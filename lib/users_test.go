@@ -2,6 +2,7 @@ package usermanager
 
 import (
     "testing"
+    "reflect"
 )
 
 func TestUsers_Find(t *testing.T) {
@@ -25,10 +26,9 @@ func TestUsers_Find(t *testing.T) {
     }
     users := Users{usersMap}
     search := map[string]string{"name": "Padraig"}
-    expected := []*User{}
-    user := NewUser("1", "Padraig", "padraig@ireland.ie", "123safe!")
-    expected = append(expected, user)
-    if res, _ := users.Find(search); res != expected {
+    expected := make([]UserInterface, 1)
+    expected[0] = NewUser("1", "Padraig", "padraig@ireland.ie", "123safe!")
+    if res, _ := users.Find(search); !reflect.DeepEqual(res, expected)  {
         t.Errorf("got %s; want %s", res, expected)
     }
     //    })
