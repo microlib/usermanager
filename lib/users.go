@@ -19,11 +19,11 @@ func (u *Users) Find(params map[string]string) ([]UserInterface, error) {
     for uk, uv := range u.users {                // users
         for pk, pv := range params {            // params
             _, isUserInResult := result[uk]
-            if _, vv := uv[pk]; vv == pv {      // if user's param is right value
+            if vv, _ := uv[pk]; vv == pv {      // if user's param is right value
 
                 // if value is not in "result", add it
 				if !isUserInResult {
-                    result[uk] = uv
+                    result[uk] = NewUser(uv["id"], uv["name"], uv["email"], uv["password"])
                 }
                 break
             } else {
@@ -36,9 +36,6 @@ func (u *Users) Find(params map[string]string) ([]UserInterface, error) {
 
         }
     }
-
-	user := NewUser("1", "Padraig", "padraig@ireland.ie", "123safe!")
-	result = append(result, user)
 
 	userInterfaces := make([]UserInterface, len(result))
 	for i, d := range result {
