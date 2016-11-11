@@ -16,18 +16,18 @@ func (u *Users) Find(params map[string]string) ([]UserInterface, error) {
 
     result := map[int]*User{}
 
-    for uk, uv := range u.users {                // users
-        for pk, pv := range params {            // params
+    for uk, uv := range u.users {               // users
+        for pk, pv := range params {            // params/values we're looking for
             _, isUserInResult := result[uk]
-            if vv, _ := uv[pk]; vv == pv {      // if user's param is right value
+            if vv, _ := uv[pk]; vv == pv {      // if user's param is the value we're looking for
 
-                // if value is not in "result", add it
+                // if user is not in "result", add it
 				if !isUserInResult {
                     result[uk] = NewUser(uv["id"], uv["name"], uv["email"], uv["password"])
                 }
                 break
             } else {
-                // here if value is in "result", remove it
+                // here if user is in "result", remove it
                 if isUserInResult {
                     delete(result, uk)
                 }
