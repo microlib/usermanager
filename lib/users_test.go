@@ -54,3 +54,7 @@ func TestUsers_Find(t *testing.T) {
 		})
 	}
 }
+
+func TestUsers_Get(t *testing.T) {
+
+}
