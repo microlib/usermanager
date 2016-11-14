@@ -52,7 +52,7 @@ func (u *Users) Get(id string) (UserInterface, error) {
 
 // Create adds a new user
 func (u *Users) Create(params map[string]string) {
-	append(u.users, map[string]string{
+	u.users = append(u.users, map[string]string{
 		"id":       params["id"],
 		"name":     params["name"],
 		"email":    params["email"],
