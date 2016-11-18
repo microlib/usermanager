@@ -20,18 +20,18 @@ func TestUsers_Find(t *testing.T) {
 					"email":    "padraig@ireland.ie",
 					"password": "123safe!",
 				},
-                map[string]string{
-                    "id":       "2",
-                    "name":     "Padraig",
-                    "email":    "pat@superirish.com",
-                    "password": "mypassword123!",
-                },
-                map[string]string{
-                    "id":       "2",
-                    "name":     "Roberto",
-                    "email":    "robbie@italianovero.it",
-                    "password": "passwordsupersicura",
-                },
+				map[string]string{
+					"id":       "2",
+					"name":     "Padraig",
+					"email":    "pat@superirish.com",
+					"password": "mypassword123!",
+				},
+				map[string]string{
+					"id":       "2",
+					"name":     "Roberto",
+					"email":    "robbie@italianovero.it",
+					"password": "passwordsupersicura",
+				},
 			},
 			map[string]string{"name": "Padraig"},
 			[]*User{
@@ -44,9 +44,9 @@ func TestUsers_Find(t *testing.T) {
 		t.Run(fmt.Sprintf("testing user #'%s'", tk), func(t *testing.T) {
 			users := Users{tc.usersMap}
 			expected := make([]UserInterface, len(tc.expected))
-            for k, user := range tc.expected {
-                expected[k] = user
-            }
+			for k, user := range tc.expected {
+				expected[k] = user
+			}
 
 			if res, _ := users.Find(tc.search); !reflect.DeepEqual(res, expected) {
 				t.Errorf("got %s; want %s", res, expected)
@@ -56,5 +56,31 @@ func TestUsers_Find(t *testing.T) {
 }
 
 func TestUsers_Get(t *testing.T) {
+	id := "1"
+	expected := NewUser("1", "Padraig", "padraig@irish.ie", "123abc")
 
+	users := Users{[]map[string]string{
+		map[string]string{
+			"id":       "1",
+			"name":     "Padraig",
+			"email":    "padraig@irish.ie",
+			"password": "123abc",
+		},
+		map[string]string{
+			"id":       "2",
+			"name":     "Padraig",
+			"email":    "pat@superirish.com",
+			"password": "mypassword123!",
+		},
+		map[string]string{
+			"id":       "2",
+			"name":     "Roberto",
+			"email":    "robbie@italianovero.it",
+			"password": "passwordsupersicura",
+		},
+	}}
+
+    if result, _ := users.Get(id); !reflect.DeepEqual(result, expected) {
+        t.Errorf("got %s; want %s", result, expected)
+    }
 }
