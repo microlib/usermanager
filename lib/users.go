@@ -49,10 +49,12 @@ func (u *Users) Find(params map[string]string) ([]UserInterface, error) {
 
 // Get returns a single user by ID
 func (u *Users) Get(id string) (UserInterface, error) {
-	if id == "4" {
-		return &User{}, errors.New("User not found")
-	}
-	return NewUser("1", "Padraig", "padraig@irish.ie", "123abc"), nil
+    for _, uv := range u.users {
+        if uv["id"] == id {
+            return NewUser(uv["id"], uv["name"], uv["email"], uv["password"]), nil
+        }
+    }
+    return &User{}, errors.New("User not found")
 }
 
 // Create adds a new user

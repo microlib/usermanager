@@ -112,6 +112,6 @@ func TestUsers_GetNotFound(t *testing.T) {
     _, err := users.Get(id)
 
     if err == nil {
-        t.Errorf("User #4 does not exist, should have returned error")
+        t.Errorf("User #%s does not exist, should have returned error", id)
     }
 }
