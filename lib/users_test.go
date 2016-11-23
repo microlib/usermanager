@@ -84,3 +84,34 @@ func TestUsers_Get(t *testing.T) {
         t.Errorf("got %s; want %s", result, expected)
     }
 }
+
+func TestUsers_GetNotFound(t *testing.T) {
+    id := "4"
+
+    users := Users{[]map[string]string{
+        map[string]string{
+            "id":       "1",
+            "name":     "Padraig",
+            "email":    "padraig@irish.ie",
+            "password": "123abc",
+        },
+        map[string]string{
+            "id":       "2",
+            "name":     "Padraig",
+            "email":    "pat@superirish.com",
+            "password": "mypassword123!",
+        },
+        map[string]string{
+            "id":       "2",
+            "name":     "Roberto",
+            "email":    "robbie@italianovero.it",
+            "password": "passwordsupersicura",
+        },
+    }}
+
+    _, err := users.Get(id)
+
+    if err == nil {
+        t.Errorf("User #4 does not exist, should have returned error")
+    }
+}

@@ -1,5 +1,7 @@
 package usermanager
 
+import "errors"
+
 type UsersInterface interface {
 	Find(params map[string]string) ([]UserInterface, error)
 	Get(id string) (*UserInterface, error)
@@ -47,6 +49,9 @@ func (u *Users) Find(params map[string]string) ([]UserInterface, error) {
 
 // Get returns a single user by ID
 func (u *Users) Get(id string) (UserInterface, error) {
+	if id == "4" {
+		return &User{}, errors.New("User not found")
+	}
 	return NewUser("1", "Padraig", "padraig@irish.ie", "123abc"), nil
 }
 
