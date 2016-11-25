@@ -102,7 +102,7 @@ func TestUsers_GetNotFound(t *testing.T) {
             "password": "mypassword123!",
         },
         map[string]string{
-            "id":       "2",
+            "id":       "3",
             "name":     "Roberto",
             "email":    "robbie@italianovero.it",
             "password": "passwordsupersicura",
@@ -113,5 +113,35 @@ func TestUsers_GetNotFound(t *testing.T) {
 
     if err == nil {
         t.Errorf("User #%s does not exist, should have returned error", id)
+    }
+}
+
+func TestUsers_Delete(t *testing.T) {
+    id := "3"
+    users := Users{[]map[string]string{
+        map[string]string{
+            "id":       "1",
+            "name":     "Padraig",
+            "email":    "padraig@irish.ie",
+            "password": "123abc",
+        },
+        map[string]string{
+            "id":       "2",
+            "name":     "Padraig",
+            "email":    "pat@superirish.com",
+            "password": "mypassword123!",
+        },
+        map[string]string{
+            "id":       "3",
+            "name":     "Roberto",
+            "email":    "robbie@italianovero.it",
+            "password": "passwordsupersicura",
+        },
+    }}
+
+    users.Delete(id)
+
+    if _, err := users.Get(id); err == nil {
+        t.Errorf("User #%s should have been deleted", id)
     }
 }

@@ -74,5 +74,15 @@ func (u *Users) Update(id string, params map[string]string) {
 
 // Delete removes an existing user
 func (u *Users) Delete(id string) {
+    for uk, uv := range u.users {
+        if uv["id"] == id {
+            u.users = u.removeFromArray(u.users, uk)
+            break
+        }
+    }
+}
 
+func (u *Users) removeFromArray(s []map[string]string, i int) []map[string]string {
+    s = append(s[:i], s[i+1:]...)
+    return s
 }
