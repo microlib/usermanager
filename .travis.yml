@@ -6,6 +6,9 @@ go:
 
 go_import_path: github.com/microlib/usermanager
 
+before_install:
+ - chmod +x coverage.bash
+
 install:
   - go get -t -v ./...
 
