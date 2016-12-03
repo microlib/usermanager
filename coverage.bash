@@ -3,7 +3,7 @@
 # This script runs the cover tool on all packages with test files. If you set a
 # WEB environment variable, it will additionally open the web-based coverage
 # visualizer for each package.
-# This file comes from go-kit
+# This file was copied from go-kit
 
 set -e
 
