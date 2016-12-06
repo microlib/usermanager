@@ -68,8 +68,23 @@ func (u *Users) Create(params map[string]string) {
 }
 
 // Update modifies values of an existing user
-func (u *Users) Update(id string, params map[string]string) {
-
+func (u *Users) Update(id string, params map[string]string) error {
+    done := false
+    for _, uv := range u.users {
+        if uv["id"] == id {
+            done = true
+            for k, v := range params {
+                if _, exists := uv[k]; exists {
+                    uv[k] = v
+                }
+            }
+            // return NewUser(uv["id"], uv["name"], uv["email"], uv["password"]), nil
+        }
+    }
+	if done == false {
+        return errors.New("User #" + id + " not found")
+    }
+    return nil
 }
 
 // Delete removes an existing user

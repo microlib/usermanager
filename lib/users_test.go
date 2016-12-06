@@ -145,3 +145,38 @@ func TestUsers_Delete(t *testing.T) {
         t.Errorf("User #%s should have been deleted", id)
     }
 }
+
+func TestUsers_Update(t *testing.T) {
+    id := "3"
+    users := Users{[]map[string]string{
+        map[string]string{
+            "id":       "1",
+            "name":     "Padraig",
+            "email":    "padraig@irish.ie",
+            "password": "123abc",
+        },
+        map[string]string{
+            "id":       "2",
+            "name":     "Padraig",
+            "email":    "pat@superirish.com",
+            "password": "mypassword123!",
+        },
+        map[string]string{
+            "id":       "3",
+            "name":     "Roberto",
+            "email":    "robbie@italianovero.it",
+            "password": "passwordsupersicura",
+        },
+    }}
+    params := map[string]string{
+        "name": "Carlo",
+        "email": "carlo.bonin@tantaroba.com",
+    }
+
+    users.Update(id, params)
+    user, _ := users.Get(id)
+
+    if (user.Name() != "Carlo" || user.Email() != "carlo.bonin@tantaroba.com") {
+        t.Errorf("User #%s should have been modified", id)
+    }
+}
