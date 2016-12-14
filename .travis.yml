@@ -6,12 +6,15 @@ go:
 
 go_import_path: github.com/microlib/usermanager
 
+before_install:
+ - chmod +x test.sh
+
 install:
   - go get -t -v ./...
 
 script:
-  - go test -race -coverprofile=coverage.txt -covermode=atomic
- 
+  - ./test.sh
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   
