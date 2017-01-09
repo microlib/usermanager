@@ -3,12 +3,12 @@ package main
 import "github.com/microlib/usermanager/lib"
 
 type UserManagerServiceInterface interface {
-	FindUser(string) usermanager.UserInterface
+	FindUser(string) (usermanager.UserInterface, error)
 }
 
 type UserManagerService struct{}
 
-func (u *UserManagerService) FindUser(id string) usermanager.UserInterface {
+func (u *UserManagerService) FindUser(id string) (usermanager.UserInterface, error) {
 	users := usermanager.Users{[]map[string]string{
 		map[string]string{
 			"id":       "1",
@@ -29,6 +29,6 @@ func (u *UserManagerService) FindUser(id string) usermanager.UserInterface {
 			"password": "passwordsupersicura",
 		},
 	}}
-	res, _ := users.Get(id)
-	return res
+	res, err := users.Get(id)
+	return res, err
 }
