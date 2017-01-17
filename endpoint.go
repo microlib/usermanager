@@ -12,6 +12,10 @@ func makeFindUserEndpoint(svc UserManagerServiceInterface) endpoint.Endpoint {
 		if err != nil {
 			return findUserResponse{u, err.Error()}, nil
 		}
-		return findUserResponse{Id: u.Id()}, nil
+		return findUserResponse{
+			Id: u.Id(),
+			Name: u.Name(),
+			Email: u.Email(),
+		}, nil
 	}
 }
