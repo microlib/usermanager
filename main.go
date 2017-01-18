@@ -11,7 +11,7 @@ import (
 
 func main() {
 	ctx := context.Background()
-	svc := UserManagerService{}
+	svc := &UserManagerService{}
 
 	findUserHandler := httptransport.NewServer(
 		ctx,

@@ -9,7 +9,7 @@ type UserManagerServiceInterface interface {
 type UserManagerService struct{}
 
 func (u *UserManagerService) FindUser(id string) (usermanager.UserInterface, error) {
-	users := usermanager.Users{[]map[string]string{
+	users := usermanager.NewUsers([]map[string]string{
 		map[string]string{
 			"id":       "1",
 			"name":     "Padraig",
@@ -28,7 +28,7 @@ func (u *UserManagerService) FindUser(id string) (usermanager.UserInterface, err
 			"email":    "robbie@italianovero.it",
 			"password": "passwordsupersicura",
 		},
-	}}
+	})
 	res, err := users.Get(id)
 	return res, err
 }

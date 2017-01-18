@@ -10,6 +10,10 @@ type UsersInterface interface {
 	Delete(id string)
 }
 
+func NewUsers(users []map[string]string) *Users {
+	return &Users{users:users}
+}
+
 type Users struct {
 	users []map[string]string
 }
