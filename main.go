@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"context"
+	"golang.org/x/net/context"
 
 	httptransport "github.com/go-kit/kit/transport/http"
 )
@@ -20,7 +20,7 @@ func main() {
 		encodeResponse,
 	)
 
-	http.Handle("/uppercase", findUserHandler)
+	http.Handle("/user", findUserHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
