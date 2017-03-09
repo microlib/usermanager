@@ -123,3 +123,22 @@ none
   }]
 }
 ```
+
+***
+
+## Development
+
+To build an image locally execute the following script
+
+```
+docker build -t usermanager:dev .
+
+```
+
+
+To execute it run the following script
+
+```
+docker run -it  --name usermanager -v /<your-dev-direcotory>/src/github.com/microlib/usermanager/:/go --privileged <image-id>
+
+```
