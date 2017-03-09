@@ -23,7 +23,7 @@ func (u *UserManagerService) FindUser(id string) (usermanager.UserInterface, err
 			"password": "mypassword123!",
 		},
 		map[string]string{
-			"id":       "2",
+			"id":       "3",
 			"name":     "Roberto",
 			"email":    "robbie@italianovero.it",
 			"password": "passwordsupersicura",

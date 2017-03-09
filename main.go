@@ -2,16 +2,26 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"golang.org/x/net/context"
 
 	httptransport "github.com/go-kit/kit/transport/http"
+	"os"
+	gokitlog "github.com/go-kit/kit/log"
+	"log"
 )
+
 
 func main() {
 	ctx := context.Background()
-	svc := &UserManagerService{}
+	var svc UserManagerServiceInterface
+	svc = &UserManagerService{}
+
+	//endpoint := makeFindUserEndpoint(svc)
+	//endpoint = loggingMiddleware(gokitlog.NewContext(logger).With("method", "users"))(endpoint)
+
+	logger := gokitlog.NewLogfmtLogger(os.Stderr)
+	svc = loggingMiddleware{logger, svc}
 
 	findUserHandler := httptransport.NewServer(
 		ctx,
@@ -21,7 +31,7 @@ func main() {
 	)
 
 	http.Handle("/user", findUserHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", findUserHandler))
 }
 
 func decodeFindUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
