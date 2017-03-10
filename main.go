@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
-	"golang.org/x/net/context"
+	"context"
 
 	httptransport "github.com/go-kit/kit/transport/http"
 	"os"
@@ -24,10 +24,10 @@ func main() {
 	svc = loggingMiddleware{logger, svc}
 
 	findUserHandler := httptransport.NewServer(
-		ctx,
 		makeFindUserEndpoint(svc),
 		decodeFindUserRequest,
 		encodeResponse,
+		ctx,
 	)
 
 	http.Handle("/user", findUserHandler)
