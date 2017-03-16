@@ -13,7 +13,6 @@ import (
 
 
 func main() {
-	ctx := context.Background()
 	var svc UserManagerServiceInterface
 	svc = &UserManagerService{}
 
@@ -27,7 +26,6 @@ func main() {
 		makeFindUserEndpoint(svc),
 		decodeFindUserRequest,
 		encodeResponse,
-		ctx,
 	)
 
 	http.Handle("/user", findUserHandler)
