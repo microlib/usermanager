@@ -123,3 +123,15 @@ none
   }]
 }
 ```
+
+*** 
+
+# Installation
+
+The dependencies of this project are stored inside the `vendor/` folder. While we use [gvt](https://github.com/FiloSottile/gvt) 
+ to manage the dependencies, we're also pushing them anyway, so that users can feel free to simply run `go get` to
+ get the dependencies.
+ 
+Keep in mind that the `vendor/` folder can only be used for dependencies out-of-the-box if you're running Go 1.6 or higher. 
+ It is also available on Go 1.5 but you will need to enable the environment variable 
+ [`GO15VENDOREXPERIMENT`](https://blog.filippo.io/most-go-tools-now-work-with-go15vendorexperiment/) and set it to `1`. 

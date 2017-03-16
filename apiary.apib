@@ -1,0 +1,65 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# usermanager
+
+Usermanager is a simple API allowing consumers to create, edit and view user(s).
+
+## Users Collection [/users]
+
+### List All Users [GET]
+
++ Response 200 (application/vnd.api+json)
+
+        {
+          "data": [{
+            "type": "users",
+            "id": "1",
+            "attributes": {
+              "name": "john",
+              "email": "john@thesmithcompany.com",
+              "password": "ja8q\+Y!?FCD3\":P"
+            }
+          }, 
+          {
+            "type": "users",
+            "id": "2",
+            "attributes": {
+              "name": "bob",
+              "email": "bob@hello.co.uk",
+              "password": "ja8q\+Y!?FCD3(:P"
+            }
+          }]
+        }
+
+### Create a New User [POST]
+
+You may create a new user using this action.
+
+- name (string) - the name of the user
+- email (string) - the email of the user
+- password (string) - the password of the user
+
++ Request (application/vnd.api+json)
+
+        {
+            "name": "Bob",
+            "email": "bob@thebob.com",
+            "password": "mypassword"
+        }
+
++ Response 201 (application/vnd.api+json)
+
+    + Body
+
+            {
+              "data": {
+                "type": "users",
+                "id": "1",
+                "attributes": {
+                  "name": "john",
+                  "email": "john@thesmithcompany.com",
+                  "password": "ja8q\+Y!?FCD3":P"
+                }
+              }
+            }
