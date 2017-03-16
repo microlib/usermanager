@@ -8,9 +8,10 @@ go_import_path: github.com/microlib/usermanager
 
 before_install:
  - chmod +x test.sh
+ - go get github.com/FiloSottile/gvt
 
 install:
-  - go get -t -v ./...
+  - gvt restore
 
 script:
   - ./test.sh
