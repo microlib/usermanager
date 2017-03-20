@@ -13,7 +13,7 @@
   - [DELETE: delete](#delete-delete)
   - [PUT: update \(replacement\)](#put-update-replacement)
   - [PATCH: partial update](#patch-partial-update)
-  - [Response](#response)
+- [Response](#response)
 - [Installation](#installation)
 
 <!-- /MarkdownTOC -->
@@ -103,7 +103,7 @@ none
 - password
 
 <a name="response"></a>
-## Response
+# Response
 
 **single resource**
 
