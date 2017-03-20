@@ -5,12 +5,28 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/microlib/usermanager)](https://goreportcard.com/report/github.com/microlib/usermanager)
 [![GoDoc](https://godoc.org/github.com/microlib/usermanager?status.svg)](https://godoc.org/github.com/microlib/usermanager)
 
+<!-- MarkdownTOC -->
+
+- [Request](#request)
+  - [POST: create](#post-create)
+  - [GET: read](#get-read)
+  - [DELETE: delete](#delete-delete)
+  - [PUT: update \(replacement\)](#put-update-replacement)
+  - [PATCH: partial update](#patch-partial-update)
+  - [Response](#response)
+- [Installation](#installation)
+
+<!-- /MarkdownTOC -->
+
+
 Endpoint: `/users`
 
-# Request 
+<a name="request"></a>
+# Request 
 
 HTTP verbs: http://www.restapitutorial.com/lessons/httpmethods.html
 
+<a name="post-create"></a>
 ## POST: create
 
 ### required fields
@@ -23,6 +39,7 @@ HTTP verbs: http://www.restapitutorial.com/lessons/httpmethods.html
 
 none
 
+<a name="get-read"></a>
 ## GET: read
 
 - single user: `/users/{id}`
@@ -38,6 +55,7 @@ none
 - email
 
 
+<a name="delete-delete"></a>
 ## DELETE: delete
 
 - single user: `/users/{id}`
@@ -53,6 +71,7 @@ none
 - name
 - email
 
+<a name="put-update-replacement"></a>
 ## PUT: update (replacement)
 
 - single user: `/users/{id}`
@@ -68,6 +87,7 @@ none
 
 none
 
+<a name="patch-partial-update"></a>
 ## PATCH: partial update 
 
 - single user: `/users/{id}`
@@ -82,6 +102,7 @@ none
 - email
 - password
 
+<a name="response"></a>
 ## Response
 
 **single resource**
@@ -126,6 +147,7 @@ none
 
 *** 
 
+<a name="installation"></a>
 # Installation
 
 The dependencies of this project are stored inside the `vendor/` folder. While we use [gvt](https://github.com/FiloSottile/gvt) 
