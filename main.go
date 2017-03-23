@@ -18,9 +18,6 @@ func main() {
 	var svc UserManagerServiceInterface
 	svc = &UserManagerService{}
 
-	//endpoint := makeFindUserEndpoint(svc)
-	//endpoint = loggingMiddleware(gokitlog.NewContext(logger).With("method", "users"))(endpoint)
-
 	logger := gokitlog.NewLogfmtLogger(os.Stderr)
 	svc = loggingMiddleware{logger, svc}
 
@@ -40,22 +37,4 @@ func main() {
 	}()
 
 	logger.Log("exit", <-errs)
-
-	//srv := &http.Server{
-	//	Handler:      handler,
-	//	Addr:         "127.0.0.1:8080",
-	//	WriteTimeout: 15 * time.Second,
-	//	ReadTimeout:  15 * time.Second,
-	//}
-	//log.Fatal(srv.ListenAndServe())
-
-	//findUsersHandler := httptransport.NewServer(
-	//	makeFindUserEndpoint(svc),
-	//	decodeFindUserRequest,
-	//	encodeResponse,
-	//)
-	//
-	//http.Handle("/user", findUsersHandler)
-	//http.Handle("/user", findUsersHandler)
-	//log.Fatal(http.ListenAndServe(":8080", findUsersHandler))
 }
