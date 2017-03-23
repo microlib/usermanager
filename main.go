@@ -3,9 +3,6 @@ package main
 import (
 	"net/http"
 	"os"
-	//"os/signal"
-	//"syscall"
-	//"fmt"
 
 	gokitlog "github.com/go-kit/kit/log"
 	"os/signal"
