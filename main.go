@@ -1,14 +1,16 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
-	"context"
-
-	httptransport "github.com/go-kit/kit/transport/http"
 	"os"
+	//"os/signal"
+	//"syscall"
+	//"fmt"
+
 	gokitlog "github.com/go-kit/kit/log"
-	"log"
+	"os/signal"
+	"syscall"
+	"fmt"
 )
 
 
@@ -22,13 +24,38 @@ func main() {
 	logger := gokitlog.NewLogfmtLogger(os.Stderr)
 	svc = loggingMiddleware{logger, svc}
 
-	findUsersHandler := httptransport.NewServer(
-		makeFindUserEndpoint(svc),
-		decodeFindUserRequest,
-		encodeResponse,
-	)
+	handler := MakeHTTPHandler(svc, logger)
 
-	http.Handle("/user", findUsersHandler)
-	http.Handle("/user", findUsersHandler)
-	log.Fatal(http.ListenAndServe(":8080", findUsersHandler))
+	errs := make(chan error)
+
+	go func() {
+		c := make(chan os.Signal)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+		errs <- fmt.Errorf("%s", <-c)
+	}()
+
+	go func() {
+		logger.Log("transport", "HTTP", "addr", ":8080")
+		errs <- http.ListenAndServe(":8080", handler)
+	}()
+
+	logger.Log("exit", <-errs)
+
+	//srv := &http.Server{
+	//	Handler:      handler,
+	//	Addr:         "127.0.0.1:8080",
+	//	WriteTimeout: 15 * time.Second,
+	//	ReadTimeout:  15 * time.Second,
+	//}
+	//log.Fatal(srv.ListenAndServe())
+
+	//findUsersHandler := httptransport.NewServer(
+	//	makeFindUserEndpoint(svc),
+	//	decodeFindUserRequest,
+	//	encodeResponse,
+	//)
+	//
+	//http.Handle("/user", findUsersHandler)
+	//http.Handle("/user", findUsersHandler)
+	//log.Fatal(http.ListenAndServe(":8080", findUsersHandler))
 }

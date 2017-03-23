@@ -44,6 +44,8 @@ func MakeHTTPHandler(s UserManagerServiceInterface, logger log.Logger) http.Hand
 	//	encodeResponse,
 	//	options...,
 	//))
+
+	return r
 }
 
 func decodeFindUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
