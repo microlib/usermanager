@@ -15,4 +15,4 @@ type findUserResponse struct {
 	Err error `json:"err,omitempty"` // errors don't JSON-marshal, so we use a string
 }
 
-func (r findUserResponse) error() error { return r.Err }
+func (f findUserResponse) error() error { return f.Err }

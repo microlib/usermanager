@@ -9,13 +9,14 @@ func makeFindUserEndpoint(svc UserManagerServiceInterface) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(findUserRequest)
 		u, err := svc.FindUser(req.Id)
-		if err != nil {
-			return findUserResponse{Err: err.Error()}, nil
-		}
+		//if err != nil {
+		//	return findUserResponse{Err: err}, err
+		//}
 		return findUserResponse{
 			Id: u.Id(),
 			Name: u.Name(),
 			Email: u.Email(),
+			Err: err,
 		}, nil
 	}
 }
