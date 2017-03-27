@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
-
-	gokitlog "github.com/go-kit/kit/log"
 	"os/signal"
 	"syscall"
-	"fmt"
+
+	gokitlog "github.com/go-kit/kit/log"
 )
 
 
@@ -16,7 +16,7 @@ func main() {
 	svc = &UserManagerService{}
 
 	logger := gokitlog.NewLogfmtLogger(os.Stderr)
-	svc = loggingMiddleware{logger, svc}
+	svc = loggingMiddleware{logger,svc}
 
 	handler := MakeHTTPHandler(svc, logger)
 
@@ -29,8 +29,8 @@ func main() {
 	}()
 
 	go func() {
-		logger.Log("transport", "HTTP", "addr", ":8080")
-		errs <- http.ListenAndServe(":8080", handler)
+		logger.Log("transport", "HTTP", "addr", ":8088")
+		errs <- http.ListenAndServe(":8088", handler)
 	}()
 
 	logger.Log("exit", <-errs)

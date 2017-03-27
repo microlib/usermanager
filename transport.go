@@ -31,7 +31,7 @@ func MakeHTTPHandler(s UserManagerServiceInterface, logger log.Logger) http.Hand
 	// GET     /user/:id			retrieves the given user by id
 	// GET     /user                       	retrieve all users given the search parameters
 
-	// try it with this: curl -X GET localhost:8080/user/2
+	// try it with this: curl -X GET localhost:8088/user/2
 	r.Methods("GET").Path("/user/{id}").Handler(httptransport.NewServer(
 		makeFindUserEndpoint(s),
 		decodeFindUserRequest,

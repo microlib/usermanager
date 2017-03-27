@@ -12,5 +12,7 @@ type findUserResponse struct {
 	Name string `json:"name"`
 	Email string `json:"email"`
 	Password string `json:"password"`
-	Err string `json:"err,omitempty"` // errors don't JSON-marshal, so we use a string
+	Err error `json:"err,omitempty"` // errors don't JSON-marshal, so we use a string
 }
+
+func (r findUserResponse) error() error { return r.Err }
