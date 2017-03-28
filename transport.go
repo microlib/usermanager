@@ -39,23 +39,10 @@ func MakeHTTPHandler(s UserManagerServiceInterface, logger log.Logger) http.Hand
 		options...,
 	))
 
-	//r.Methods("GET").Path("/user/{id}").Handler(httptransport.NewServer(
-	//	e.GetProfileEndpoint,
-	//	decodeGetProfileRequest,
-	//	encodeResponse,
-	//	options...,
-	//))
-
 	return r
 }
 
 func decodeFindUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request findUserRequest
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return nil, err
-	}
-	return request, nil
-
 	vars := mux.Vars(r)
 	id, ok := vars["id"]
 	if !ok {
