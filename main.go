@@ -1,14 +1,13 @@
 package main
 
 import (
-	"encoding/json"
+	"fmt"
 	"net/http"
-	"context"
-
-	httptransport "github.com/go-kit/kit/transport/http"
 	"os"
+	"os/signal"
+	"syscall"
+
 	gokitlog "github.com/go-kit/kit/log"
-	"log"
 )
 
 
@@ -16,31 +15,23 @@ func main() {
 	var svc UserManagerServiceInterface
 	svc = &UserManagerService{}
 
-	//endpoint := makeFindUserEndpoint(svc)
-	//endpoint = loggingMiddleware(gokitlog.NewContext(logger).With("method", "users"))(endpoint)
-
 	logger := gokitlog.NewLogfmtLogger(os.Stderr)
-	svc = loggingMiddleware{logger, svc}
+	svc = loggingMiddleware{logger,svc}
 
-	findUserHandler := httptransport.NewServer(
-		makeFindUserEndpoint(svc),
-		decodeFindUserRequest,
-		encodeResponse,
-	)
+	handler := MakeHTTPHandler(svc, logger)
 
-	http.Handle("/user", findUserHandler)
-	log.Fatal(http.ListenAndServe(":8080", findUserHandler))
+	errs := make(chan error)
+
+	go func() {
+		c := make(chan os.Signal)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+		errs <- fmt.Errorf("%s", <-c)
+	}()
+
+	go func() {
+		logger.Log("transport", "HTTP", "addr", ":8088")
+		errs <- http.ListenAndServe(":8088", handler)
+	}()
+
+	logger.Log("exit", <-errs)
 }
-
-func decodeFindUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request findUserRequest
-	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-		return nil, err
-	}
-	return request, nil
-}
-
-func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
-	return json.NewEncoder(w).Encode(response)
-}
-
