@@ -6,7 +6,6 @@ import (
 	"errors"
 	"context"
 	"fmt"
-	"encoding/json"
 	"reflect"
 )
 
@@ -47,10 +46,8 @@ func TestMakeFindUserEndpoint(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("User with id '%s'", tc.findUserReq.Id), func(t *testing.T) {
 			res, _ := makeFindUserEndpoint(&FkUserManagerService{})(context.Background(), tc.findUserReq)
-			res, _ = json.Marshal(res)
-			exp, _ := json.Marshal(tc.expected)
-			if !reflect.DeepEqual(res, exp) {
-				t.Errorf("got %s; want %s", res, exp)
+			if !reflect.DeepEqual(res, tc.expected) {
+				t.Errorf("got %s; want %s", res, tc.expected)
 			}
 		})
 	}
