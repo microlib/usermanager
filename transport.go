@@ -28,11 +28,19 @@ func MakeHTTPHandler(s UserManagerServiceInterface, logger log.Logger) http.Hand
 		httptransport.ServerErrorEncoder(encodeError),
 	}
 
-	// GET     /user/:id			retrieves the given user by id
-	// GET     /user                       	retrieve all users given the search parameters
+	// GET     /users/:id			retrieves the given user by id
+	// GET     /users                       retrieve all users given the search parameters
 
-	// try it with this: curl -X GET localhost:8088/user/2
-	r.Methods("GET").Path("/user/{id}").Handler(httptransport.NewServer(
+	// try it with this: curl -X GET localhost:8088/users/2
+	r.Methods("GET").Path("/users/{id}").Handler(httptransport.NewServer(
+		makeFindUserEndpoint(s),
+		decodeFindUserRequest,
+		encodeResponse,
+		options...,
+	))
+
+	// try it with this: curl -X GET localhost:8088/users
+	r.Methods("GET").Path("/users").Handler(httptransport.NewServer(
 		makeFindUserEndpoint(s),
 		decodeFindUserRequest,
 		encodeResponse,
