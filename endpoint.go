@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/go-kit/kit/endpoint"
+	"github.com/microlib/usermanager/lib"
 )
 
 func makeFindUserEndpoint(svc UserManagerServiceInterface) endpoint.Endpoint {
@@ -24,15 +25,24 @@ func makeFindUsersEndpoint(svc UserManagerServiceInterface) endpoint.Endpoint {
 
 		// create params based on the request
 		params := map[string]string{}
-		params["name"] = req.Name
-		params["email"] = req.Email
+		if req.Name != "" {
+			params["name"] = req.Name
+		}
+		if req.Email != "" {
+			params["email"] = req.Email
+		}
 
 		u, err := svc.FindUsers(params)
-		return findUserResponse{
-			Id: u.Id(),
-			Name: u.Name(),
-			Email: u.Email(),
+
+		return findUsersResponse{
+			Users: usersToFindUserResponse(u),
 			Err: err,
 		}, nil
 	}
 }
+
+func usersToFindUserResponse([]*usermanager.User) []*findUserResponse {
+	findUserReponses := []*findUserResponse{}
+	findUserReponses = append(findUserReponses, &findUserResponse{})
+}
+
