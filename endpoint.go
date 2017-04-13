@@ -41,8 +41,9 @@ func makeFindUsersEndpoint(svc UserManagerServiceInterface) endpoint.Endpoint {
 	}
 }
 
-func usersToFindUserResponse([]*usermanager.User) []*findUserResponse {
+func usersToFindUserResponse([]usermanager.UserInterface) []*findUserResponse {
 	findUserReponses := []*findUserResponse{}
 	findUserReponses = append(findUserReponses, &findUserResponse{})
+	return findUserReponses
 }
 

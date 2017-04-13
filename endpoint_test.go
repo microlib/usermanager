@@ -6,7 +6,7 @@ import (
 )
 
 func TestUsersToFindUserResponse(t *testing.T) {
-	users := []*usermanager.User{}
+	users := []usermanager.UserInterface{}
 	users = append(users, usermanager.NewUser("1", "Piero", "piero@email.it", ""))
 
 	res := usersToFindUserResponse(users)
